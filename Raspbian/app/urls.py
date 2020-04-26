@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.urls import path
-from app import cp_views as views
+from app import views
 
 urlpatterns = [
     path('login/',views.login),
@@ -9,6 +9,8 @@ urlpatterns = [
     path('look/',views.look),
     path('control/',views.control),
     path('face/',views.face),
+    path('take_a_photo/',views.take_a_photo),
+    path('face_compare/',views.face_compare),
     # url(r'^login$', views.login),
     # url(r'^logout$', views.logout),
     # url(r'^$', views.index),
