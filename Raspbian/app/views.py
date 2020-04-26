@@ -32,7 +32,7 @@ def thdata():
             thd.save()
         time.sleep(120)
 
-def getdata()
+
 
 
 @login_required()
