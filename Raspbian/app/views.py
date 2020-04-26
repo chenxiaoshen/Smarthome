@@ -19,6 +19,20 @@ from picamera import PiCamera
 
 RPi.GPIO.setmode(RPi.GPIO.BCM)
 
+def thdata():
+    while True:
+        instance = dht11.DHT11(4)
+        result = instance.read()
+        if result.is_valid():
+            temp=result.temperature
+            hum =result.humidity
+            RPi.GPIO.cleanup(4)
+            now = time.strftime('%Y %m %d %H %M %S', time.localtime(time.time()))
+            thd = TH_FORM(timeval=now,temperature=temp,humidity=hum)
+            thd.save()
+        time.sleep(120)
+
+def getdata()
 
 
 @login_required()
@@ -84,10 +98,10 @@ def login(request):
 		LOGIN = '智能家居系统'
 	return render(request,'login.html',{'LOGIN':LOGIN})
 
-#控制LED
+#查看历史数据
 @login_required()
-def control(request):
-	return render(request,'control.html')
+def history(request):
+	return render(request,'history.html')
 
 #人脸比对的页面
 @login_required()

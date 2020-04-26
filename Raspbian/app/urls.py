@@ -7,7 +7,7 @@ urlpatterns = [
     path('logout/',views.logout),
     path('',views.index),
     path('look/',views.look),
-    path('control/',views.control),
+    path('history/',views.history),
     path('face/',views.face),
     path('take_a_photo/',views.take_a_photo),
     path('face_compare/',views.face_compare),
