@@ -35,81 +35,81 @@ def thdata():
 
 @login_required()
 def face(request):
-	return render(request,'face.html')
+    return render(request,'face.html')
 
 
 # 主页
 @login_required()
 def index(request):
-	return render(request,'index.html')
+    return render(request,'index.html')
 
 #查看
 @login_required()
 def look(request):
-	if request.method == 'POST':
-		instance = dht11.DHT11(4)
-		result = instance.read()
+    if request.method == 'POST':
+        instance = dht11.DHT11(4)
+        result = instance.read()
 
-		if result.is_valid():
-			temp = "%d ℃" % result.temperature
-			hum = "%d %%" % result.humidity
-			RPi.GPIO.cleanup(4)
-			return JsonResponse({'temperature': temp, 'humidity': hum})
-		else:
-			return HttpResponse('error')
+        if result.is_valid():
+            temp = "%d ℃" % result.temperature
+            hum = "%d %%" % result.humidity
+            RPi.GPIO.cleanup(4)
+            return JsonResponse({'temperature': temp, 'humidity': hum})
+        else:
+            return HttpResponse('error')
 
-	else:
-		instance = dht11.DHT11(4)
-		result = instance.read()
+    else:
+        instance = dht11.DHT11(4)
+        result = instance.read()
 
-		temp = "%d ℃" % result.temperature
-		hum = "%d %%" % result.humidity
-		RPi.GPIO.cleanup(4)
+        temp = "%d ℃" % result.temperature
+        hum = "%d %%" % result.humidity
+        RPi.GPIO.cleanup(4)
 
 
-		return render(request, 'look.html', {'temperature': temp, 'humidity': hum})
+        return render(request, 'look.html', {'temperature': temp, 'humidity': hum})
 
 
 def logout(request):
-	auth.logout(request)
-	return redirect('/login')
+    auth.logout(request)
+    return redirect('/login')
 
 # 登录
 def login(request):
-	if request.method =='POST':
-		username = request.POST['username']
-		password = request.POST['password']
-		#验证登录，正确则authenticate()返回一个User对象，错误则返回一个None类
-		user = auth.authenticate(username=username, password=password)
-		if user is not None:
-			if user.is_active:
-				auth.login(request, user)#登录用户
-				return redirect('/',{'username':username})#使用重定向而不是render返回首页，可以避免刷新再次提交表单导致出错
-			else:
-				NOT_ACTIVE = '你的账户没有激活，请联系管理员Ck：ckxs1021@163.com'
-				render(request,'login.html',{'NOT_ACTIVE':NOT_ACTIVE})
-		else:
-			ERROR = 'Typing Error'
-			return render(request,'login.html',{'ERROR':ERROR })
+    if request.method =='POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        #验证登录，正确则authenticate()返回一个User对象，错误则返回一个None类
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                auth.login(request, user)#登录用户
+                return redirect('/',{'username':username})#使用重定向而不是render返回首页，可以避免刷新再次提交表单导致出错
+            else:
+                NOT_ACTIVE = '你的账户没有激活，请联系管理员Ck：ckxs1021@163.com'
+                render(request,'login.html',{'NOT_ACTIVE':NOT_ACTIVE})
+        else:
+            ERROR = 'Typing Error'
+            return render(request,'login.html',{'ERROR':ERROR })
 
-	else:
-		LOGIN = '智能家居系统'
-	return render(request,'login.html',{'LOGIN':LOGIN})
+    else:
+        LOGIN = '智能家居系统'
+    return render(request,'login.html',{'LOGIN':LOGIN})
 
 #查看历史数据
 @login_required()
 def history(request):
     THD = TH_FORM.objects.filter()
-	return render(request,'history.html',{'THD': THD})
+    return render(request,'history.html',{'THD': THD})
 
 #人脸比对的页面
 @login_required()
 def face(request):
-	return render(request,'face.html')
+    return render(request,'face.html')
 
 @login_required()
 def take_a_photo(request):
-    # 实例化一个相机类
+
     camera = PiCamera()
 
     # 照片名由时间组成
