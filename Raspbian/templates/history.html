@@ -36,6 +36,12 @@
 		<h1>查看历史数据</h1>
 	</div>
 </div>
+{% for i in THD %}
+    <p>{{ THD.timeval }}</p>
+    <p>{{ THD.temperature }}</p>
+    <p>{{ THD.humidity }}</p>
+{% endfor %}
+
 
 
 

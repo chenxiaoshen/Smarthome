@@ -33,8 +33,6 @@ def thdata():
         time.sleep(120)
 
 
-
-
 @login_required()
 def face(request):
 	return render(request,'face.html')
@@ -101,7 +99,8 @@ def login(request):
 #查看历史数据
 @login_required()
 def history(request):
-	return render(request,'history.html')
+    THD = TH_FORM.objects.filter()
+	return render(request,'history.html',{'THD': THD})
 
 #人脸比对的页面
 @login_required()
