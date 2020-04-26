@@ -6,19 +6,19 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from app.hardware import dht11
-from app.hardware import relay
 from app.models import TH_FORM
 import os
 import sys 
-#import RPi.GPIO
+import RPi.GPIO
 import requests
 import json
 import time
 import datetime
-#from picamera import PiCamera
+from picamera import PiCamera
 
 
 #RPi.GPIO.setmode(RPi.GPIO.BCM)
+
 
 
 @login_required()
@@ -93,7 +93,6 @@ def control(request):
 def face(request):
 	return render(request,'face.html')
 
-# 拍照功能
 @login_required()
 def take_a_photo(request):
     # 实例化一个相机类
@@ -113,12 +112,10 @@ def take_a_photo(request):
     img = "/static/face/" + face_name
 
     # 设置相机的分辨率
-    camera.resolution = (1920, 1080)
+    camera.resolution = (1280, 720)
+    camera.rotation = 180
     # 相机预览，很可惜只有接上显示屏才能预览，ssh方式无法预览
     camera.start_preview()
-
-    # ----------相机操作--------------------
-
     # 相机启动需要点时间
     time.sleep(2)
     # 拍照，把大小裁剪为1024x768，太大不适合提交给人脸比对
@@ -137,8 +134,8 @@ def face_compare(request):
     face1 = 'app/' + request.GET['img1']
     face2 = 'app/' + request.GET['img2']
     # face++的应用api_key和api_secret
-    api_key = 'ezjHE7AHaQGJSzuHOviLu-GMiJqv8MKk'
-    api_secret = 'fU8U6wgDYgCnPa5dOOwUAPwUyQU5T1Xm'
+    api_key = 'vigklkgJlKAFaSOuRfQGNcNAPz2Jrkfk'
+    api_secret = 'rnLgNWHIACuE6KcpWIlxf13Bc6uDpqDW'
     # 接入face++ 人脸比对API
     url = 'https://api-cn.faceplusplus.com/facepp/v3/compare?api_key=%s&api_secret=%s' % (api_key, api_secret)
     # 载入两个本地图片进行比对
@@ -164,16 +161,13 @@ def face_compare(request):
         confidence = data.get('confidence')
         if confidence >= 60:
 
-            compare_result = '很大可能是同一个人'
-            # 若是同一个人，则门开
-            door = Relay(11)
-            door.open()
+            compare_result = '是同一个人'
             result = {'compare_result': compare_result, 'JSON': JSON}
             return JsonResponse(result)
 
         elif confidence < 60:
 
-            compare_result = '很大可能不是同一个人'
+            compare_result = '不是同一个人'
             result = {'compare_result': compare_result, 'JSON': JSON}
             return JsonResponse(result)
     else:
@@ -182,4 +176,3 @@ def face_compare(request):
         result = {'compare_result': compare_result, 'JSON': JSON}
         # 使用JsonResponse能更好的返回json数据
         return JsonResponse(result)
-

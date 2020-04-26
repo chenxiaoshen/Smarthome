@@ -39,7 +39,7 @@ def take_a_photo(request):
     img = "/static/face/" + face_name
 
     # 设置相机的分辨率
-    camera.resolution = (1920, 1080)
+    camera.resolution = (1280, 720)
     # 相机预览，很可惜只有接上显示屏才能预览，ssh方式无法预览
     camera.start_preview()
 
