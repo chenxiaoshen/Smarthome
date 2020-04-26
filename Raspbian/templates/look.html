@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block head %}
+<link href="/static/bootstrap/css/weather.css" rel="stylesheet" type="text/css">
+<style>
+/* 透明块*/
+
+.statement{
+	margin:0px;
+	border-bottom:1px solid #eee;
+	background:#fff;
+	padding:30px;
+	
+	}
+	
+.time{
+	text-align:center;
+	color:#333;
+	margin:0px;
+	padding:30px;
+	
+	background:#fff;
+	
+	}
+	
+							
+.temperature{
+	background:#fff;
+	margin:0px;
+	padding:0 0 60px 0;
+	}							
+      
+
+
+</style>
+{% endblock %}
+{% block title%}查看温湿度{% endblock %}
+{% block content %}
+
+<div class="container" style="box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.3);">
+<!--statement-->
+<div class="row text-center">
+	<div class="statement">
+		<h1>温度与湿度</h1>
+	</div>	
+</div>
+
+				
+<!--time-->
+<div class="row">
+	<div class="time">
+		<h1>时间</h1>
+		<h3 id="p0"></h3>
+	</div>
+	
+</div>
+
+<!--temperature-->
+<div class="row temperature">
+	<div class="weather-wrapper">
+		<div class="weather-card madrid">
+			<div class="weather-icon sun"></div>
+				<h1 id="p1"></h1>
+				<p>温度</p>
+		</div>
+
+		<div class="weather-card london">
+			<div class="weather-icon cloud"></div>
+				<h1 id="p2"></h1>
+				<p>湿度</p>
+		</div>		
+	</div>							
+</div>
+
+</div>
+
+<script>
+	// time function
+	$(document).ready(function(){
+		setInterval("startRequest()",1000); // every 3s do once startRequest()
+	});
+
+	// startRequest()
+	function startRequest(){
+		var now = new Date();
+		var year = now.getFullYear(); //获取年份
+        var month = now.getMonth() + 1; //获取月份
+        var date = now.getDate(); //获取日期
+        var day = now.getDay(); //获取星期
+        var hour = now.getHours(); //获取小时
+        var minute = now.getMinutes(); //获取分钟
+        var seconds = now.getSeconds(); //获取秒
+        var arr_week = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+        var week = arr_week[day];
+        date = extra(date);
+        month = extra(month);
+        minute = extra(minute);
+        seconds = extra(seconds);
+        var time = year + "年" + month + "月" + date + "日 " + week + " " + hour + ":" + minute + ":" + seconds;
+		$("#p0").html(time);
+		$.ajax({
+				url:"/look/",
+				type:"POST",
+				dataType:"json",
+				data:{
+					csrfmiddlewaretoken:'{{ csrf_token }}'
+				},
+				success:function(data){
+					$("#p1").html(data['temperature']);
+					$("#p2").html(data['humidity']);
+				},
+		});
+	};
+	function extra(x) {
+        //如果传入数字小于10，数字前补一位0。
+        if (x < 10) {
+            return "0" + x;
+        }
+        else {
+            return x;
+        }
+    };
+
+</script>
+
+
+{% endblock%}

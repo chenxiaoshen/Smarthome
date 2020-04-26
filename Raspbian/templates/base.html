@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!--js-->
+	<script src="/static/bootstrap/js/jquery.min.js"></script>
+	<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <!--添加bootstrap-->
+	<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+	<!--添加favicon-->
+	<link rel="shortcut icon" type="image/png" href="/static/img/bth.ico"/>
+	<!--block for head-->
+	{% block head %}{% endblock %}
+	<style>
+
+		/* header 树莓派色背景 */
+		.banner-green{
+			position: relative;
+            height:300px;
+            background-color: #FF0256;
+            color: #fff;
+			}
+
+		/* 导航条定位 */
+        .nav-position{
+        	padding-top:20px;
+    		background-color: #FF0256;
+    		border-bottom:0;
+    		margin-bottom:0;
+    		}
+
+		/* 设置导航条链接颜色为白色 */
+    	.navbar-default .navbar-nav > li > a {color: #fff;}
+
+		/*  内容区高为100%可以使footer置底部，前提是html,body也设置为高100% */
+		.content{
+					min-height: 100%;
+					height: auto;
+					height: 100%;
+
+					}
+
+
+
+		/* 页脚 */
+		.footer1{
+                    text-align: center;
+					background-color:#FF0256;
+					color: #fff;
+					line-height:1;
+					padding:30px;
+					font-weight:200;
+
+					}
+
+		html,body {	height: 100%; 
+			}
+
+		a:link{
+			color:white;
+		}
+        a:visited{
+            color:white;
+        }
+        a:hover{
+            color:deepskyblue;
+        }
+        a:active{
+            color:deeppink;
+        }
+
+
+	</style>
+
+</head>
+<body>
+<!--带导航的页头-->
+<header role="banner">
+	<div class="banner-green">
+		<!--导航条-->
+		<nav role="navigation" class="navbar navbar-static-top navbar-default nav-position">
+			<div class="container">
+				<!--brand && toggle-->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed navbar-right" data-toggle="collapse" data-target="#myheader"  >
+						<span class="sr-only"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!--nav links-->
+				<form class="collapse navbar-collapse" id="myheader">
+					<ul class="nav navbar-nav navbar-left ">
+						<li><a href="/" style="font-size: 20px"><span class="glyphicon glyphicon-home"></span>主页</a></li>
+                        <li><a href="/look" style="font-size: 20px"><span class="glyphicon glyphicon-eye-open"></span> 查看温湿度 </a></li>
+						<li><a href="/control" style="font-size: 20px"><span class="glyphicon glyphicon-book"></span> 历史数据查询 </a></li>
+                        <li><a href="/face" style="font-size: 20px"><span class="glyphicon glyphicon-user"></span> 人脸识别 </a></li>
+						<li><a href="/logout" style="font-size: 20px"><span class="glyphicon glyphicon-off"></span> 退出 </a></li>
+					</ul>
+				</form>
+			</div>
+		</nav>
+		<!--智能家居系统简介-->
+		<div style="text-align:center;">
+			<h1 style="font-size:72px;text-shadow:-5px 5px 0px rgba(0,0,0,.2);">智能家居系统</h1><br>
+			<p style="font-size:30px;">智能，即将到来</p>
+            <a href="https://github.com/chenxiaoshen/smarthome" style="font-size: 20px;text-align: right" target="_blank">项目源码托管于github</a>
+		</div>
+	</div>
+</header>
+
+<!--内容区-->
+<main role="main">
+	{% block content %} {% endblock %}
+</main>
+
+<!--页脚-->
+<footer>
+	<div class="row footer1">
+        <h3 style="font-size: 35px;text-shadow: -5px 5px 0px rgba(0,0,0,.2);">The mission of Raspberry Pi</h3>
+        <h3 style="font-size: 15px;">
+            Our mission is to put the power of computing and digital making into the <br>
+            hands of people all over the world. We do this so that more people are <br>
+            able to harness the power of computing and digital technologies<br>
+            for work, to solve problems that matter to them, and to express <br>
+            themselves creatively.
+            <br>
+            <a href="https://www.raspberrypi.org/" style="text-align: right;font-size: 20px" target="_blank">——www.raspberrypi.org</a>
+        </h3>
+        <p style="font-size: 15px;font-weight:200;text-align: right">联系我：ckxs1021@163.com</p>
+    </div>
+
+</footer>
+
+</body>
+</html>

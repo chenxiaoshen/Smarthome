@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+	.content{
+		box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.3);	
+		
+	}
+	.img{
+		
+		background:url("/static/img/znjj.jpg");
+		height:600px;
+		text-align:center;
+		background-position:left top;
+		background-size:880px 580px;
+		background-repeat:no-repeat;
+		
+		
+	}
+	
+	
+</style>
+{% endblock %}
+{% block title%}主页{% endblock %}
+{% block content %}
+<div class="container content">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h1></h1>
+		</div>
+	</div>
+	
+	
+	<div class="row">	
+		<!--left-->
+		<div class="col-md-9">
+			<div class="text-center img">
+				<div style="padding-top:110px;">
+					<p style="font-size:50px;color:#FF3969;">
+						Enjoy your life !<br>
+					</p>
+				</div>
+
+			</div>
+
+		</div>
+		<!--right-->
+		<div class="col-md-3">
+			<div style=" padding:15px 0 15px 0;box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);height:580px;">
+				<h3 class="text-center">基于树莓派制作</h3>
+				<div class="text-center" style="padding:15px 0 15px 0;">
+					<img src="/static/img/raspi.jpg" width="240">
+				</div>
+				
+				<div class="text-left" style="padding:20px 20px 0px 20px">
+					<p style="line-height:1.6;font-weight:200;" >
+                        树莓派是什么？<br>
+                        一句话！<br>
+                        树莓派是一个卡片大小的开发板，上面可以运行Linux系统，我们可以用它开发我们想要的设备。
+
+					</p>
+					
+				</div>
+			</div>
+		
+		</div>
+	</div>
+
+</div>
+
+{% endblock%}
+
