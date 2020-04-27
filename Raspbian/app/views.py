@@ -30,7 +30,7 @@ def thdata():
             now = time.strftime('%Y %m %d %H %M %S', time.localtime(time.time()))
             thd = TH_FORM(timeval=now,temperature=temp,humidity=hum)
             thd.save()
-        time.sleep(120)
+        time.sleep(300)
 
 
 @login_required()
