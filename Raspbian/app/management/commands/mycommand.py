@@ -5,7 +5,7 @@ import time
 from app.models import TH_FORM
 
 class Command(BaseCommand):
-    def getdhd(self):
+    def handle(self, *args, **options):
         while True:
             instance = dht11.DHT11(4)
             result = instance.read()
