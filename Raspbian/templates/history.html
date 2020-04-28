@@ -18,21 +18,30 @@
 	<div class="statement">
 		<h1>查看历史数据</h1>
 	</div>
-    <div class="table table-hover">
+    <div class="statement">
+    <table class="table">
+        <thead>
+           <tr>
+               <th>时间</th>
+               <th>温度</th>
+               <th>湿度</th>
+           </tr>
+        </thead>
+        <tbody>
         {% if THD %}
-        <ul>
             {% for thd in THD %}
-            <li>{{ thd.timeval }}{{ thd.temperature }}{{ thd.humidity }}</li>
+        <tr>
+            <th scope="row"></th>
+            <td>{{ thd.timeval }}</td>
+            <td>{{ thd.temperature }}</td>
+            <td>{{ thd.humidity }}</td>
+        </tr>
             {% endfor %}
-        </ul>
-        {% else %}
-            <p>NO DATA.</p>
         {% endif %}
+      </tbody>
+    </table>
     </div>
-</div>s
-
-
-
+</div>
 
 </div>
 
