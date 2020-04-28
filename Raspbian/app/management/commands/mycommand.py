@@ -13,7 +13,7 @@ class Command(BaseCommand):
                 temp = result.temperature
                 hum = result.humidity
                 RPi.GPIO.cleanup(4)
-                now = time.strftime('%Y %m %d %H %M %S', time.localtime(time.time()))
+                now = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                 thd = TH_FORM(timeval=now, temperature=temp, humidity=hum)
                 thd.save()
             time.sleep(300)

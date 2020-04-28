@@ -5,6 +5,6 @@ from django.contrib import admin
 
 # Create your models here.
 class TH_FORM(models.Model):
-    timeval=models.CharField(max_length=32)
+    timeval=models.CharField(max_length=20)
     temperature = models.IntegerField()
     humidity = models.IntegerField()
