@@ -124,7 +124,7 @@ def login(request):
 #查看历史数据
 @login_required()
 def history(request):
-    THD = TH_FORM.objects.filter().order_by('-timeval')
+    THD = TH_FORM.objects.all().order_by('-timeval')
     pagedata = split_page(THD,request,per_page=8)
 
     return render(request,'history.html',pagedata)
