@@ -38,8 +38,8 @@
            </tr>
         </thead>
         <tbody>
-        {% if THD %}
-            {% for thd in THD %}
+        {% if paginator %}
+            {% for thd in paginator %}
         <tr class="text-center">
             <td>{{ thd.timeval }}</td>
             <td>{{ thd.temperature }}</td>
