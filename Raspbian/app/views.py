@@ -88,7 +88,7 @@ def login(request):
 @login_required()
 def history(request):
     THD = TH_FORM.objects.all().order_by('-timeval')
-    paginator = Paginator(THD,8,4)
+    paginator = Paginator(THD,8)
     page = request.GET.get('page',1)
     currentPage = int(page)
     if paginator.num_pages > 3:
