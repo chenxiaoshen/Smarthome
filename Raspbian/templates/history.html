@@ -38,12 +38,12 @@
            </tr>
         </thead>
         <tbody>
-        {% if paginator %}
-            {% for thd in paginator %}
+        {% if thd %}
+            {% for i in thd %}
         <tr class="text-center">
-            <td>{{ thd.timeval }}</td>
-            <td>{{ thd.temperature }}</td>
-            <td>{{ thd.humidity }}</td>
+            <td>{{ i.timeval }}</td>
+            <td>{{ i.temperature }}</td>
+            <td>{{ i.humidity }}</td>
         </tr>
             {% endfor %}
         {% endif %}
