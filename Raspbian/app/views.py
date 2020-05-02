@@ -89,14 +89,24 @@ def login(request):
 def history(request):
     THD = TH_FORM.objects.all().order_by('-timeval')
     paginator = Paginator(THD,8,4)
-    page = request.GET.get('page')
+    page = request.GET.get('page',1)
+    currentPage = int(page)
+    if paginator.num_pages > 3:
+        if currentPage - 3 < 1:
+            pageRange = range(1,5)
+        elif currentPage + 3 > paginator.num_pages:
+            pageRange = range(currentPage - 3,paginator.num_pages + 1)
+        else:
+            pageRange = range(currentPage - 3,currentPage + 3)
+    else:
+        pageRange = paginator.page_range
     try:
         get_page = paginator.page(page)
     except PageNotAnInteger:
         get_page = paginator.page(1)
     except EmptyPage:
         get_page = paginator.page(paginator.num_pages)
-    return render(request,'history.html',{"THD":get_page})
+    return render(request,'history.html',{"THD":get_page,"pageRange":pageRange,"currentPage":currentPage})
 
 #人脸比对的页面
 @login_required()
