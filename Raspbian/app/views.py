@@ -101,12 +101,12 @@ def history(request):
     else:
         pageRange = paginator.page_range
     try:
-        get_page = paginator.page(page)
+        thd = paginator.page(page)
     except PageNotAnInteger:
-        get_page = paginator.page(1)
+        thd = paginator.page(1)
     except EmptyPage:
-        get_page = paginator.page(paginator.num_pages)
-    return render(request,'history.html',{"THD":get_page,"pageRange":pageRange,"currentPage":currentPage})
+        thd = paginator.page(paginator.num_pages)
+    return render(request,'history.html',locals())
 
 #人脸比对的页面
 @login_required()
