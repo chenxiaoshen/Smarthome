@@ -16,4 +16,5 @@ class Command(BaseCommand):
                 now = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                 thd = TH_FORM(timeval=now, temperature=temp, humidity=hum)
                 thd.save()
+                print("isSaved")
             time.sleep(300)

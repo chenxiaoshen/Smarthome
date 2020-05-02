@@ -88,8 +88,15 @@ def login(request):
 @login_required()
 def history(request):
     THD = TH_FORM.objects.all().order_by('-timeval')
-
-    return render(request,'history.html',{"THD":THD})
+    paginator = Paginator(THD,8,4)
+    page = request.GET.get('page')
+    try:
+        get_page = paginator.page(page)
+    except PageNotAnInteger:
+        get_page = paginator.page(1)
+    except EmptyPage:
+        get_page = paginator.page(paginator.num_pages)
+    return render(request,'history.html',{"THD":get_page})
 
 #人脸比对的页面
 @login_required()

@@ -24,7 +24,6 @@
 {% block title%}查看历史数据{% endblock %}
 {% block content %}
 <div class="container" style="box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.3);">
-
 <div class="row">
 	<div class="statement">
 		<h1>查看历史数据</h1>
@@ -52,7 +51,33 @@
     </table>
     </div>
 </div>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        {% if THD.has_previous %}
+        <li>
+            <a href="?page={{ THD.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">上一页</span>
+            </a>
+        </li>
+        {% endif %}
 
+    {% for pg in THD.paginator.page_range %}
+        {% if THD.number == pg %}
+            <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>
+        {% else %}
+            <li><a href="?page={{ pg }}">{{ pg }}</a></li>
+        {% endif %}
+    {% endfor %}
+
+    {% if THD.has_next %}
+    <li>
+        <a href="?page={{ THD.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">下一页</span>
+        </a>
+    </li>
+    {% endif %}
+    </ul>
+</nav>
 </div>
 
 {% endblock%}
