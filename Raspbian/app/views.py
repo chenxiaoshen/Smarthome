@@ -106,7 +106,7 @@ def history(request):
         get_page = paginator.page(1)
     except EmptyPage:
         get_page = paginator.page(paginator.num_pages)
-    return render(request,'history.html',{"THD":get_page,"pageRange":pageRange,"currentPage":currentPage})
+    return render(request,'history.html',{"THD":get_page,"pageRange":pageRange,"currentPage":currentPage},locals())
 
 #人脸比对的页面
 @login_required()
