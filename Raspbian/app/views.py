@@ -87,7 +87,11 @@ def login(request):
 #查看历史数据
 @login_required()
 def history(request):
-    THD = TH_FORM.objects.all().order_by('-timeval')
+    ser = request.GET.get('ser')
+    if ser == "":
+        THD = TH_FORM.objects.all().order_by('-timeval')
+    else:
+        THD = TH_FORM.objects.filter(timeval__icontains=ser).order_by('-timeval')
     paginator = Paginator(THD,8)
     page = request.GET.get('page',1)
     currentPage = int(page)
@@ -154,8 +158,8 @@ def face_compare(request):
     face1 = 'app/' + request.GET['img1']
     face2 = 'app/' + request.GET['img2']
     # face++的应用api_key和api_secret
-    api_key = 'vigklkgJlKAFaSOuRfQGNcNAPz2Jrkfk'
-    api_secret = 'rnLgNWHIACuE6KcpWIlxf13Bc6uDpqDW'
+    api_key = 'ezjHE7AHaQGJSzuHOviLu-GMiJqv8MKk'
+    api_secret = 'fU8U6wgDYgCnPa5dOOwUAPwUyQU5T1Xm'
     # 接入face++ 人脸比对API
     url = 'https://api-cn.faceplusplus.com/facepp/v3/compare?api_key=%s&api_secret=%s' % (api_key, api_secret)
     # 载入两个本地图片进行比对

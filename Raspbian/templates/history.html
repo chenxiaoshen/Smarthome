@@ -29,6 +29,13 @@
 		<h1>查看历史数据</h1>
 	</div>
     <div>
+    <form method="get" action="/history">
+        {% csrf_token %}
+        <input type="text" name="ser" placeholder="搜索" required>
+        <button type="submit">搜索</button>
+    </form>
+    </div>
+    <div>
     <table class="table table-hover table-bordered table-condensed">
         <thead>
            <tr>
