@@ -88,10 +88,10 @@ def login(request):
 @login_required()
 def history(request):
     ser = request.GET.get('ser')
-    if ser == "":
-        THD = TH_FORM.objects.all().order_by('-timeval')
-    else:
+    if ser:
         THD = TH_FORM.objects.filter(timeval__icontains=ser).order_by('-timeval')
+    else:
+        THD = TH_FORM.objects.all().order_by('-timeval')
     paginator = Paginator(THD,8)
     page = request.GET.get('page',1)
     currentPage = int(page)
