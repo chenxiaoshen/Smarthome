@@ -29,11 +29,11 @@
 		<h1>查看历史数据</h1>
 	</div>
     <div>
-    <form style="float: right" method="get" action="/history/">
+    <form style="align:center" method="get" action="/history/">
    {% csrf_token %}
    <label>
     <div class="form-group">
-     <input type="search" class="form-control" name="ser" placeholder="搜索日期，如：2020-05-03">
+     <input type="search" style="width: 300px" class="form-control" name="ser" placeholder="搜索日期，如：2020-05-03">
     </div>
    </label>
    <input class="btn btn-default" type="submit" value="搜索">
